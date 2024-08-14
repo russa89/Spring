@@ -3,11 +3,9 @@ package com.example.demo.service;
 import com.example.demo.model.Item;
 import com.example.demo.repository.Basket;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.awt.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService {
@@ -20,15 +18,15 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void add(List<Long> itemIds) {
-basket.addAll(itemIds.stream()
-        .map(Item::new)
-        .toList());
+        basket.addAll(itemIds.stream()
+                .map(Item::new)
+                .toList());
 
     }
-
-
-    @Override
-    public List<Item> get() {
-return basket.getAll();
+@Override
+    public List<Long> getBasket() {
+        return basket.getAll().stream()
+                .map(Item::getItemId)
+                .collect(Collectors.toList());
     }
 }

@@ -7,5 +7,6 @@ import java.util.List;
 public interface CartService {
     void add(List<Long> itemIds);
 
-    List<Item> get();
+
+    List<Long> getBasket();
 }
